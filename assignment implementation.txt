@@ -1,0 +1,26 @@
+
+
+Assignment Write-Up
+
+How I structured the code:
+
+I structured the code around a Python class called `MobiusStrip`, which encapsulates all the required functionality: mesh generation, surface area estimation, edge length calculation, and 3D visualization. The class takes the radius (`R`), strip width (`w`), and resolution (`n`) as input parameters. It first creates a grid of values using `u` and `v` — the parameters from the Möbius strip's equation — and computes the corresponding `X`, `Y`, `Z` coordinates using the standard parametric equations. The plotting function uses Matplotlib to visualize the surface, and separate functions are defined to compute the surface area and edge length.
+
+---
+
+How I approximated the surface area:
+
+To approximate the surface area, I used a mesh-based approach. The surface was divided into small rectangular patches using the mesh grid, and then each patch was split into two triangles. I calculated the area of each triangle using vector cross products and summed up all these tiny triangle areas to estimate the total surface area.
+
+Initially, I thought the surface could be treated like a flat rectangle (since if we cut a Möbius strip through the middle, we get a flat band-like shape). However, while referring to similar projects and reading how others approached this, I understood that this assumption breaks down because of the strip’s twist in 3D space — it cannot be flattened without distortion. This insight helped me adopt a more accurate numerical method suited for curved surfaces.
+
+---
+
+Challenges I faced:
+
+One of the challenges I faced was understanding how to work with mesh grids (`np.meshgrid`) and why they're needed. At first, the idea of converting two 1D parameter arrays into a 2D grid for computing 3D surface points was not intuitive to me. I reviewed examples from similar parametric surface modeling tasks and gradually got clarity on how each combination of `u` and `v` is needed to generate the complete surface.
+
+Another challenge was around surface area estimation. I initially attempted to treat the strip like a rectangular surface, but I later realized this doesn’t account for the 3D twist of the Möbius strip. After exploring how others tackled this in projects involving curved or twisted surfaces, I adopted the triangle-based method. This helped me gain confidence in approximating surface area even for geometrically complex shapes. Aside from these, I found the rest of the implementation — including the logic, structure, and visualization — to be manageable and rewarding.
+
+---
+
